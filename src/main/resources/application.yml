@@ -1,12 +1,12 @@
 spring:
   datasource:
     username: root
-    password: assiua25
-    url: jdbc:mysql://localhost:3306/competition?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    password: [yourself]
+    url: jdbc:mysql://localhost:3306/[yourself]?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 mybatis-plus:
-  mapper-locations: classpath*:mapper/StulistMapper.xml
+  mapper-locations: classpath*:mapper/*Mapper.xml
   configuration:
     # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
