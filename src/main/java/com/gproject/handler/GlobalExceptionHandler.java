@@ -1,48 +1,54 @@
 package com.gproject.handler;
 
 import com.gproject.vo.Result;
+import com.gproject.vo.ResultCode;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.ShiroException;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+@ControllerAdvice
 @Slf4j
-@RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(value = ShiroException.class)
-    public Result handler(ShiroException e) {
-        log.error("运行时异常：----------------{}", e);
-        return Result.fail(401, e.getMessage(), null);
+    /**
+     * 全局异常处理,没有指定异常的类型,不管什么异常都是可以捕获的
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public Result error(Exception e){
+        e.printStackTrace();
+        log.error(e.getMessage());
+        return Result.error();
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public Result handler(MethodArgumentNotValidException e) {
-        log.error("实体校验异常：----------------{}", e);
-        BindingResult bindingResult = e.getBindingResult();
-        ObjectError objectError = bindingResult.getAllErrors().stream().findFirst().get();
-
-        return Result.fail(objectError.getDefaultMessage());
+    /**
+     * 处理特定异常类型,可以定义多个
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(ArithmeticException.class)
+    @ResponseBody
+    public Result error(ArithmeticException e){
+        e.printStackTrace();
+        log.error(e.getMessage());
+        return Result.error().code(ResultCode.ARITHMETIC_EXCEPTION.getCode())
+                .message(ResultCode.ARITHMETIC_EXCEPTION.getMsg());
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = IllegalArgumentException.class)
-    public Result handler(IllegalArgumentException e) {
-        log.error("Assert异常：----------------{}", e);
-        return Result.fail(e.getMessage());
-    }
-
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = RuntimeException.class)
-    public Result handler(RuntimeException e) {
-        log.error("运行时异常：----------------{}", e);
-        return Result.fail(e.getMessage());
+    /**
+     * 处理业务异常,我们自己定义的异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(BusinessException.class)
+    @ResponseBody
+    public Result error(BusinessException e){
+        e.printStackTrace();
+        log.error(e.getErrMsg());
+        return Result.error().code(e.getCode())
+                .message(e.getErrMsg());
     }
 }

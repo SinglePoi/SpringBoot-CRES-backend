@@ -59,10 +59,9 @@ public class MenuController {
             List<Menu> rootMenu = menuService.findAll(menu);
             // 构建好的菜单树，第一层菜单的pid是null
             List<Menu> menuTree = buildMenuTree(rootMenu, null);
-            Result r = Result.succe(menuTree);
 //            Result result = new Result();
 //            result.setData(menuTree);
-            return r;
+            return Result.succe().data("menu",menuTree);
 
     }
 

@@ -3,11 +3,15 @@ package com.gproject.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.gproject.entity.College;
 import com.gproject.entity.Notice;
 import com.gproject.entity.Stulist;
+import com.gproject.handler.BusinessException;
+import com.gproject.mapper.CollegeMapper;
 import com.gproject.mapper.StulistMapper;
 import com.gproject.service.IStulistService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gproject.vo.ResultCode;
 import com.gproject.vo.StuListOV;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +53,9 @@ public class StulistServiceImpl extends ServiceImpl<StulistMapper, Stulist> impl
         return this.stulistMapper.findStuPage(page, wrapper);
     }
 
+    @Override
+    public void insert(Stulist stulist) {
+
+    }
 
 }

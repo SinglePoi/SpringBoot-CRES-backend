@@ -1,6 +1,6 @@
 package com.gproject.service;
 
-import com.gproject.entity.User;
+import com.gproject.entity.College;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,9 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author jobob
- * @since 2020-12-01
+ * @since 2020-12-23
  */
-public interface IUserService extends IService<User> {
+public interface ICollegeService extends IService<College> {
 
-    User login(User user);
 }

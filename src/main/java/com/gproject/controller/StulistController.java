@@ -8,8 +8,10 @@ import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gproject.entity.Notice;
 import com.gproject.entity.Stulist;
+import com.gproject.handler.BusinessException;
 import com.gproject.service.IStulistService;
 import com.gproject.vo.Result;
+import com.gproject.vo.ResultCode;
 import com.gproject.vo.StuListOV;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -70,9 +72,7 @@ public class StulistController {
         Map<String,Object> map = new HashMap<>();
         map.put("records",records);
         map.put("total",total);
-        Result result = new Result();
-        result.setData(map);
-        return result;
+        return Result.succe().data("data",map);
     }
 
     private QueryWrapper<Stulist> getWrapper(StuListOV stuListOV){
@@ -92,16 +92,23 @@ public class StulistController {
     @GetMapping("/selectById/{id}")
     @ApiOperation(value = "学生信息", notes = "查询单个学生信息")
     public Result getById(@PathVariable("id") long id){
-        Result result = new Result();
+//        Result result = new Result();
+//        Stulist stulist = stulistService.selectById(id);
+//        try{
+//            result.setData(stulist);
+//            result.setMsg("查询成功");
+//        }catch (Exception e){
+//            result.setStatus(false);
+//            result.setMsg("操作失败");
+//        }
+//        return result;
         Stulist stulist = stulistService.selectById(id);
-        try{
-            result.setData(stulist);
-            result.setMsg("查询成功");
-        }catch (Exception e){
-            result.setStatus(false);
-            result.setMsg("操作失败");
+        if(stulist!=null){
+            return Result.succe().data("data",stulist);
+        }else {
+            throw new BusinessException(ResultCode.USER_ACCOUNT_NOT_EXIST.getCode(),
+                    ResultCode.USER_ACCOUNT_NOT_EXIST.getMsg());
         }
-        return result;
     }
 
     @GetMapping("/college")
@@ -110,5 +117,10 @@ public class StulistController {
         List<Stulist> lists;
         lists = stulistService.college();
         return lists;
+    }
+
+    @PostMapping("/insert")
+    public void insert(@RequestBody Stulist stulist){
+        stulistService.insert(stulist);
     }
 }

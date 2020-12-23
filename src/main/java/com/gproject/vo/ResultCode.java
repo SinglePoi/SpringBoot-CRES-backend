@@ -28,9 +28,9 @@ public enum ResultCode implements CustomizeResultCode{
     USER_ACCOUNT_ALREADY_EXIST(2008, "账号已存在"),
     USER_ACCOUNT_USE_BY_OTHERS(2009, "账号下线"),
 
-    /*组织错误*/
-    ORGANIZATION_NOT_EXIST(3007, "组织不存在"),
-    ORGANIZATION_ALREADY_EXIST(3008, "组织已存在"),
+    /*学院错误*/
+    COLLEGE_NOT_EXIST(3007, "组织不存在"),
+    COLLEGE_ALREADY_EXIST(3008, "组织已存在"),
 
     /* 业务错误 */
     NO_PERMISSION(3001, "没有权限"),

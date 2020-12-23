@@ -43,6 +43,7 @@ public class Notice implements Serializable {
     private String competitionType;
 
     private String grade;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startdate;
 

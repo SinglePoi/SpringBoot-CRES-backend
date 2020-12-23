@@ -49,4 +49,8 @@ public interface StulistMapper extends BaseMapper<Stulist> {
 
 
 //    IPage<Stulist> findStuPage(Page<Stulist> page, @Param(Constants.WRAPPER) QueryWrapper<Stulist> wrapper);
+
+//    @Select("insert into stulist values(#{id}, #{studentId}, #{studentName}, #{collegeId}, #{gender}, null," +
+//            " #{gender})")
+//    int insert(Stulist stulist);
 }

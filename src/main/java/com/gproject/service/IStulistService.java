@@ -29,4 +29,6 @@ public interface IStulistService extends IService<Stulist> {
     List<Stulist> college();
 
     IPage<Stulist> findStuPage(Page<Stulist> page,QueryWrapper<Stulist> wrapper);
+
+    void insert(Stulist stulist);
 }
