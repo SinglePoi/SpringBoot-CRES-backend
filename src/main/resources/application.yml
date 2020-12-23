@@ -16,10 +16,10 @@ mybatis:
 server:
   port: 8181
 alioss:
-  endpoint: oss-cn-hangzhou.aliyuncs.com
-  accessKeyId: LTAI4GAkpMDK9u8JpDVdEE9A
-  accessKeySecret: HTtERWQuyNIzoqwebD6WoaR7JQJpk7
-  bucketName: spring-boot-graduation-project
+  endpoint: [yourself]
+  accessKeyId: [yourself]
+  accessKeySecret: [yourself]
+  bucketName: [yourself]
 shiro-redis:
   enabled: true
   redis-manager:
